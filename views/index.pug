@@ -6,22 +6,30 @@ html
     title #{__('TITLE', community)}
     link(href="css/style.css", rel="stylesheet", type="text/css")
     link(href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,700italic|Open+Sans:700italic,400,600,300,700,800", rel="stylesheet", type="text/css")
+
+    link(rel="icon" href="https://www.nyansa.com/wp-content/uploads/2016/03/cropped-nayansa-favicon-master-32x32.png" sizes="32x32")
+    link(rel="icon" href="https://www.nyansa.com/wp-content/uploads/2016/03/cropped-nayansa-favicon-master-192x192.png" sizes="192x192")
+    link(rel="apple-touch-icon-precomposed" href="https://www.nyansa.com/wp-content/uploads/2016/03/cropped-nayansa-favicon-master-180x180.png")
+    meta(name="msapplication-TileImage" content="https://www.nyansa.com/wp-content/uploads/2016/03/cropped-nayansa-favicon-master-270x270.png")
   body
     #wrapper
       .main
         .header
-          h1
-            strong #{community}
-          h2 #{__('HEADER', community)}
+          img(src="/images/voyers.png")
+          img(src="/images/slack.png" style="position:absolute;top:10px;")
         .content
           .information
             form(method="POST", action="invite")#join-form.form
-              input(type="email", name="email", autofocus, placeholder=__('ENTER_EMAIL'))#slack-email.field
+              input(type="email", name="email", autofocus, placeholder="your@email.com")#slack-email.field
               if tokenRequired
                 input(type="text", name="token", placeholder=__('ENTER_TOKEN'))#slack-token.field
               input(type="submit", value="Join").submit
+              label Enter your email above to join our Voyers community on Slack!
               if !!recaptchaSiteKey
                 div(class="g-recaptcha", data-sitekey=recaptchaSiteKey)
+        .bottom
+          img(src="/images/just-logo.png" style="height:40px; margin-right:10px;")
+          img(src="/images/just-nyansa.png" style="height:40px;")
     if !!recaptchaSiteKey
        script(src='https://www.google.com/recaptcha/api.js')
     script.
