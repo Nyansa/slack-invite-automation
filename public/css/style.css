@@ -152,3 +152,19 @@ a:hover {
 label {
   color: #fff;
 }
+
+button.field {
+  width: 478px;
+  color: #FFF;
+  background-color: #7EB6FF;
+}
+
+.shirt-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+img.shirt {
+  width: 70%;
+  -webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;
+}

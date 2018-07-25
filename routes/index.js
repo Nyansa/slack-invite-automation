@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-
 const config = require('../config');
 const { badge } = require('../lib/badge');
-
 const sanitize = require('sanitize');
+const moment = require('moment');
+const { addRow } = require('../lib/sheet');
 
 router.get('/', function(req, res) {
   res.setLocale(config.locale);
@@ -17,6 +17,14 @@ router.get('/', function(req, res) {
 router.post('/invite', function(req, res) {
   if (req.body.email && (!config.inviteToken || (!!config.inviteToken && req.body.token === config.inviteToken))) {
     function doInvite() {
+      if (true) {
+        return res.render('result', {
+          community: config.community,
+          email: req.body.email,
+          message: 'Success! Check &ldquo;'+ req.body.email +'&rdquo; for an invite from Slack.'
+        });
+      }
+
       request.post({
           url: 'https://'+ config.slackUrl + '/api/users.admin.invite',
           form: {
@@ -34,6 +42,7 @@ router.post('/invite', function(req, res) {
           if (body.ok) {
             res.render('result', {
               community: config.community,
+              email: req.body.email,
               message: 'Success! Check &ldquo;'+ req.body.email +'&rdquo; for an invite from Slack.'
             });
           } else {
@@ -107,6 +116,26 @@ router.post('/invite', function(req, res) {
       isFailed: true
     });
   }
+});
+
+router.post('/shirt', (req, res) => {
+  addRow(1, {
+    "Timestamp": moment().format('M/D/YYYY k:mm:ss'),
+    "Shirt Size": req.body.size,
+    "Your Name": req.body.name,
+    "Address 1": req.body.address,
+    "email": req.body.email,
+    "phone": req.body.phone,
+    "Company Name": req.body.company
+  }).then(() => {
+    res.render('shirt', {
+      message: "Thanks! Your shirt will arrive soon."
+    });
+  }).catch(() => {
+    res.render('shirt', {
+      message: "An error occurred. Please try again later."
+    });
+  });
 });
 
 router.get('/badge.svg', (req, res) => {

@@ -1,0 +1,10 @@
+doctype html
+html
+    include includes/head.pug
+    body
+        #wrapper
+            .main
+                include includes/header
+                .content
+                    h2(class=isFailed ? 'error' : '') !{message}
+                include includes/footer

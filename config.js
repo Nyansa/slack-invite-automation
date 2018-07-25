@@ -16,6 +16,10 @@ module.exports = {
   // an optional security measure - if both are set, then recaptcha will be used.
   recaptchaSiteKey: process.env.RECAPTCHA_SITE || null,
   recaptchaSecretKey: process.env.RECAPTCHA_SECRET || null,
+  // google sheets
+  googleClientEmail: process.env.GOOGLE_CLIENT_EMAIL || null,
+  googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY || null,
+  googleDocId: process.env.GOOGLE_DOC_ID || null,
   // default locale
   locale: process.env.LOCALE || "en",
   subpath: process.env.SUBPATH || "/"
