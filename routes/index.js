@@ -17,14 +17,6 @@ router.get('/', function(req, res) {
 router.post('/invite', function(req, res) {
   if (req.body.email && (!config.inviteToken || (!!config.inviteToken && req.body.token === config.inviteToken))) {
     function doInvite() {
-      if (true) {
-        return res.render('result', {
-          community: config.community,
-          email: req.body.email,
-          message: 'Success! Check &ldquo;'+ req.body.email +'&rdquo; for an invite from Slack.'
-        });
-      }
-
       request.post({
           url: 'https://'+ config.slackUrl + '/api/users.admin.invite',
           form: {
